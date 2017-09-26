@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Youtube jQuery</title>
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="node_modules/axios/dist/axios.min.js"></script>
+	<script src="node_modules/youtube-api-search/index.js"></script>
+	<link rel="stylesheet" href="app.css"> </head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"> <img src="img/youtube.gif" width="200px"> </div>
+			<div class="input-group buscador col-md-8">
+				<input id="inputId" class="form-control" placeholder="Buscar">
+				<div class="input-group-btn">
+					<button id="search" class="btn" type="button"> <i class="glyphicon glyphicon-search"></i> </button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="principal"> </div>
+				<div class="info"> </div>
+			</div>
+			<div class="col-md-4">
+				<ol id="root"></ol>
+			</div>
+		</div>
+	</div>
+	<script src="app.js"></script>
+</body>
+
+</html>
