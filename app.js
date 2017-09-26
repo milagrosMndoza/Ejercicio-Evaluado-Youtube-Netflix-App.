@@ -1,67 +1,78 @@
 "use strict";
-const API_KEY "AIzaSyC3beUrK0-c49t50ztheqHzKtPYw949C1c";
+const API_KEY = "AIzaSyC3beUrK0-c49t50ztheqHzKtPYw949C1c";
 class video {
 	constructor() {
 		this.result = {
 			videos: [],
 			selectedVideo: null,
 			searchTerm: "Peru"
-		}
-	}, this.youtubeSearch("Peru");
-	$("#inputId").keyup((e) => {
-		if (e.keyCode == 13) {
+		};
+		this.youtubeSearch("Peru");
+		$("#inputId").keyup((e) => {
+			if (e.keyCode == 13) {
+				$("#root").empty();
+				this.youtubeSearch($("#inputId").val());
+			}
+		});
+		$("#search").click(() => {
 			$("#root").empty();
 			this.youtubeSearch($("#inputId").val());
-		}
-	});
-	$("#search").click(() => {
-			$("#lista").empty();
-			this.youtubeSearch($("#inputId").val());
-		}
-		//<iframe className="embed-responsive-item" src={url}> </iframe>
-		getVideoList(videos) {
-			return videos.map((video, index) => {
-				const imageUrl = video.snippet.thumbnails.default.url;
-				const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-				return `<li> 
+		});
+	}
+	getVideoList(videos) {
+		return videos.map((video, index) => {
+			const imageUrl = video.snippet.thumbnails.default.url;
+			const url = `https://www.youtube.com/embed/${video.id.videoId}`;
+			return `<li> 
                      <img class="media-object" src=${imageUrl} /> 
                      <p> 
                         <iframe class="embed-responsive-item" src=${url}> </iframe>
                      </p>
                </li>`;
-			});
-		}, youtubeSearch(searchTerm) {
-			console.log(searchTerm);
-			YTSearch({
-				key: API_KEY,
-				term: searchTerm
-			}, data => {
-				console.log("result", data);
-				app.result = {
-					videos: data,
-					selectedVideo: data[0],
-					searchTerm: searchTerm
-				};
-				var list = app.getVideoList(app.result.videos);
-				console.log("lis: ", list);
-				$("#root").append(list);
-			});
-		}, videoSearch(searchTerm) {
-			jQuery.getJSON("list.json", data => {
-				console.log("result", data.items);
-				app.result = {
-					videos: data.items,
-					selectedVideo: data.items[0],
-					searchTerm: searchTerm
-				};
-				var list = app.getVideoList(app.result.videos);
-				console.log("lis: ", list);
-				$("#root").append(list);
-			});
-		}
-	};
+		});
+	}
+	//<iframe className="embed-responsive-item" src={url}> </iframe>
+	getVideoList(videos) {
+		let primer = 0;
+		return videos.map((video, index) => {
+			const imageUrl = video.snippet.thumbnails.default.url;
+			const url = `https://www.youtube.com/embed/${video.id.videoId}`;
+			if (primer == 0) {
+				$('.principal').html(`<iframe class="embed-responsive-item" src=${url}> </iframe>`);
+				$('.info').html(`<h3>${video.snippet.title}</h3><hr><p>${video.snippet.description}</p><span class='channel'>${video.snippet.channelTitle}</span><br><br><br>`);
+				primer++;
+				console.log(video.snippet);
+				return;
+			}
+			return `<li class="row" id=${video.id.videoId}> 
+                               <div class='col-md-5'><a><img class="media-object" src=${imageUrl} /></a></div><div class='col-md-7'><h5>${video.snippet.title}</h5><span class='channel'>${video.snippet.channelTitle}</span></div>
+                        </li>`;
+		});
+	}
+	videoClicks() {
+		$("li").click((e) => {
+			$("#lista").empty();
+			let id = $(e.currentTarget).attr("id");
+			//let div = $(e.currentTarget).children()[1];
+			//let txt = $(div).children()[0];
+			//let buscar = id + $(txt).text();
+			//console.log(buscar);
+			this.youtubeSearch(id);
+		});
+	}
+	youtubeSearch(searchTerm) {
+		YTSearch({
+			key: API_KEY,
+			term: searchTerm
+		}, data => {
+			this.result = {
+				videos: data,
+				selectedVideo: data[0],
+				searchTerm: searchTerm
+			};
+			var list = this.getVideoList(this.resultado.videos);
+			$("#resultado").append(list);
+			this.videoClicks();
+		});
+	}
 	$(document).ready(app.init);
-	init() {
-		//app.videoSearch("iPhone");
-		app.youtubeSearch("iPhone X");
-	},
