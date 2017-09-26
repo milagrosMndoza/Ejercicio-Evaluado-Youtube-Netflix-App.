@@ -1,13 +1,13 @@
 "use strict";
-const API_KEY = "AIzaSyA5CaMF5XAolZJ-2AJfdPW7F3KEpQl9aOI";
+const API_KEY = "AIzaSyB6RQPxv-X6aojxx9IKh0Nc4twyqlMnitI";
 class video {
 	constructor() {
 		this.result = {
-			videos: []
-			, selectedVideo: null
-			, searchTerm: "Peru"
+			videos: [],
+			selectedVideo: null,
+			searchTerm: "peru"
 		};
-		this.youtubeSearch("Peru");
+		this.youtubeSearch("laboratoria");
 		$("#inputId").keyup((e) => {
 			if (e.keyCode == 13) {
 				$("#root").empty();
@@ -20,28 +20,27 @@ class video {
 		});
 	}
 	getVideoList(videos) {
-			return videos.map((video, index) => {
-				const imageUrl = video.snippet.thumbnails.default.url;
-				const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-				return `<li> 
+		return videos.map((video, index) => {
+			const imageUrl = video.snippet.thumbnails.default.url;
+			const url = `https://www.youtube.com/embed/${video.id.videoId}`;
+			return `<li> 
                      <img class="media-object" src=${imageUrl} /> 
                      <p> 
                         <iframe class="embed-responsive-item" src=${url}> </iframe>
                      </p>
                </li>`;
-			});
-		}
-		//<iframe className="embed-responsive-item" src={url}> </iframe>
+		});
+	}
+	//<iframe className="embed-responsive-item" src={url}> </iframe>
 	getVideoList(videos) {
-		let primer = 0;
+		let inicio = 0;
 		return videos.map((video, index) => {
 			const imageUrl = video.snippet.thumbnails.default.url;
 			const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-			if (primer == 0) {
+			if (inicio == 0) {
 				$('.principal').html(`<iframe class="embed-responsive-item" src=${url}> </iframe>`);
 				$('.info').html(`<h3>${video.snippet.title}</h3><hr><p>${video.snippet.description}</p><span class='channel'>${video.snippet.channelTitle}</span><br><br><br>`);
-				primer++;
-				console.log(video.snippet);
+				inicio++;
 				return;
 			}
 			return `<li class="row" id=${video.id.videoId}> 
@@ -58,13 +57,13 @@ class video {
 	}
 	youtubeSearch(searchTerm) {
 		YTSearch({
-			key: API_KEY
-			, term: searchTerm
+			key: API_KEY,
+			term: searchTerm
 		}, data => {
 			this.result = {
-				videos: data
-				, selectedVideo: data[0]
-				, searchTerm: searchTerm
+				videos: data,
+				selectedVideo: data[0],
+				searchTerm: searchTerm
 			};
 			var list = this.getVideoList(this.result.videos);
 			$("#result").append(list);
