@@ -1,11 +1,11 @@
 "use strict";
-const API_KEY = "AIzaSyC3beUrK0-c49t50ztheqHzKtPYw949C1c";
+const API_KEY = "AIzaSyA5CaMF5XAolZJ-2AJfdPW7F3KEpQl9aOI";
 class video {
 	constructor() {
 		this.result = {
-			videos: [],
-			selectedVideo: null,
-			searchTerm: "Peru"
+			videos: []
+			, selectedVideo: null
+			, searchTerm: "Peru"
 		};
 		this.youtubeSearch("Peru");
 		$("#inputId").keyup((e) => {
@@ -20,18 +20,18 @@ class video {
 		});
 	}
 	getVideoList(videos) {
-		return videos.map((video, index) => {
-			const imageUrl = video.snippet.thumbnails.default.url;
-			const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-			return `<li> 
+			return videos.map((video, index) => {
+				const imageUrl = video.snippet.thumbnails.default.url;
+				const url = `https://www.youtube.com/embed/${video.id.videoId}`;
+				return `<li> 
                      <img class="media-object" src=${imageUrl} /> 
                      <p> 
                         <iframe class="embed-responsive-item" src=${url}> </iframe>
                      </p>
                </li>`;
-		});
-	}
-	//<iframe className="embed-responsive-item" src={url}> </iframe>
+			});
+		}
+		//<iframe className="embed-responsive-item" src={url}> </iframe>
 	getVideoList(videos) {
 		let primer = 0;
 		return videos.map((video, index) => {
@@ -51,28 +51,25 @@ class video {
 	}
 	videoClicks() {
 		$("li").click((e) => {
-			$("#lista").empty();
+			$("#root").empty();
 			let id = $(e.currentTarget).attr("id");
-			//let div = $(e.currentTarget).children()[1];
-			//let txt = $(div).children()[0];
-			//let buscar = id + $(txt).text();
-			//console.log(buscar);
 			this.youtubeSearch(id);
 		});
 	}
 	youtubeSearch(searchTerm) {
 		YTSearch({
-			key: API_KEY,
-			term: searchTerm
+			key: API_KEY
+			, term: searchTerm
 		}, data => {
 			this.result = {
-				videos: data,
-				selectedVideo: data[0],
-				searchTerm: searchTerm
+				videos: data
+				, selectedVideo: data[0]
+				, searchTerm: searchTerm
 			};
-			var list = this.getVideoList(this.resultado.videos);
-			$("#resultado").append(list);
+			var list = this.getVideoList(this.result.videos);
+			$("#result").append(list);
 			this.videoClicks();
 		});
 	}
-	$(document).ready(app.init);
+}
+let youtube = new video();
