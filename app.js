@@ -66,7 +66,7 @@ class video {
 				searchTerm: searchTerm
 			};
 			var list = this.getVideoList(this.result.videos);
-			$("#result").append(list);
+			$("#root").append(list);
 			this.videoClicks();
 		});
 	}
