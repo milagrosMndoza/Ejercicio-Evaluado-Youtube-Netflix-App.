@@ -19,26 +19,14 @@ class video {
 			this.youtubeSearch($("#inputId").val());
 		});
 	}
-	getVideoList(videos) {
-		return videos.map((video, index) => {
-			const imageUrl = video.snippet.thumbnails.default.url;
-			const url = `https://www.youtube.com/embed/${video.id.videoId}`;
-			return `<li> 
-                     <img class="media-object" src=${imageUrl} /> 
-                     <p> 
-                        <iframe class="embed-responsive-item" src=${url}> </iframe>
-                     </p>
-               </li>`;
-		});
-	}
-	//<iframe className="embed-responsive-item" src={url}> </iframe>
+
 	getVideoList(videos) {
 		let inicio = 0;
 		return videos.map((video, index) => {
 			const imageUrl = video.snippet.thumbnails.default.url;
 			const url = `https://www.youtube.com/embed/${video.id.videoId}`;
 			if (inicio == 0) {
-				$('.principal').html(`<iframe class="embed-responsive-item" src=${url}> </iframe>`);
+				$('.principal').html(`<iframe class="embed-responsive-item grande" src=${url}> </iframe>`);
 				$('.info').html(`<h3>${video.snippet.title}</h3><hr><p>${video.snippet.description}</p><span class='channel'>${video.snippet.channelTitle}</span><br><br><br>`);
 				inicio++;
 				return;

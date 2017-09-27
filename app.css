@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 * {
 	font-family: 'Roboto', sans-serif;
+	/* outline: solid 2px red; */
 }
 
 body {
-	background: #fff;
+	/* background: #fff; */
+	background-image: url(http://pa1.narvii.com/6512/878d065706b6db275e845e78746b01412fdc4ab7_hq.gif);
 	text-transform: uppercase;
 }
 
@@ -28,8 +30,12 @@ h3 {
 
 .principal {
 	padding-top: 5%;
+	height: 200%;
 }
-
+.grande{
+	width: 100%;
+	height: 90% !important;
+}
 .scoreboard {
 	background: #333;
 	width: 700px;
