@@ -38,7 +38,7 @@ class video {
 	}
 	videoClicks() {
 		$("li").click((e) => {
-			$("#root").empty();
+			// $("#root").empty();
 			let id = $(e.currentTarget).attr("id");
 			this.youtubeSearch(id);
 		});
